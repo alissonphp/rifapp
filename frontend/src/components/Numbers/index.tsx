@@ -1,5 +1,8 @@
-import Number from "components/Number";
 import { useEffect, useState } from "react";
+import Number from "components/Number";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 
 const Numbers = () => {
   let rows: any[] = [];
@@ -61,7 +64,8 @@ const Numbers = () => {
           </p>
           <div className="d-grid gap-2">
             <a href="/" className="btn btn-outline-success btn-lg mt-3">
-              Reservar {selectNumbers.length > 1 ? "números" : "número"}
+              Reservar {selectNumbers.length > 1 ? "números " : "número "} 
+               <FontAwesomeIcon icon={faArrowRight} />
             </a>
           </div>
         </div>

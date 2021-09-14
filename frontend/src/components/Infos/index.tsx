@@ -1,3 +1,6 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faWhatsapp } from "@fortawesome/free-brands-svg-icons";
+
 import Numbers from "components/Numbers";
 
 const styles = {
@@ -47,12 +50,11 @@ const Infos = () => {
                   <div className="d-flex w-100 justify-content-between">
                     <h5 className="mb-1">Oferecido por</h5>
                     <small className="text-muted">
-                      Whatsapp: 988877444
+                      <FontAwesomeIcon icon={faWhatsapp} size="2x" /> (98) 98887-7444
                     </small>
                   </div>
                   <p className="mb-1">ARLS Lauro Sodré N 03</p>
                 </div>
-
               </ul>
             </div>
           </div>
