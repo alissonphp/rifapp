@@ -6,7 +6,7 @@ const Numbers = () => {
   for (let index = 0; index < 1000; index++) {
     rows.push(index);
   }
-  const [items, setItems] = useState<any[]>(rows);
+  const [items] = useState<any[]>(rows);
   const [filteredItems, setFilteredItems] = useState<any[]>(rows);
   const [selectNumbers, setSelectNumbers] = useState<string[]>([]);
   const [filter, setFilter] = useState<any>("");
