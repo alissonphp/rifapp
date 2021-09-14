@@ -30,7 +30,7 @@ const Infos = () => {
                   <div className="d-flex w-100 justify-content-between">
                     <h5 className="mb-1">Valor do número</h5>
                     <small>
-                      <a href="#">R$ 20,00 de cashback</a>
+                      <a href="/">R$ 20,00 de cashback</a>
                     </small>
                   </div>
                   <p className="mb-1">R$ 50,00</p>

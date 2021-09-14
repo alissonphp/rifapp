@@ -60,7 +60,7 @@ const Numbers = () => {
             Total da compra: R$ {selectNumbers.length * 50.0},00
           </p>
           <div className="d-grid gap-2">
-            <a href="" className="btn btn-outline-success btn-lg mt-3">
+            <a href="/" className="btn btn-outline-success btn-lg mt-3">
               Reservar {selectNumbers.length > 1 ? "números" : "número"}
             </a>
           </div>
