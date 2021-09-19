@@ -11,10 +11,12 @@ const Number = ({ num, onNumberSelected }: Props) => {
   return (
     <div
       onClick={() => clicked(num)}
-      className="col-md-2 col-lg-1 col-sm-6 col-xs-12 text-center number m-2 p-2 avaliable"
+      className="col-md-2 col-lg-1 col-sm-6 col-xs-12 text-center p-1"
     >
-      {num}
-      <small>DISPONÍVEL</small>
+      <div className="number avaliable">
+        <h1>{num}</h1>
+        <small>DISPONÍVEL</small>
+      </div>
     </div>
   );
 };

@@ -32,19 +32,25 @@ html, body {
 }
 .number {
     font-weight: lighter;
-    font-size: 2.8rem;
-    border-radius: 16px;
+    border-radius: 50%;
+    height: 108px;
     color: #fff;
     transition: all .2s ease-in-out;
-    border: #fff 3px solid;
+    border: rgb(218, 218, 218) 3px solid;
 }
 .number:hover {
     transform:  scale(1.3);
     cursor: pointer;
 }
+.number h1 {
+    font-weight: lighter;
+    font-size: 2.8rem;
+    margin-top: 14px;
+}
 .number small {
     display: block;
     font-size: 0.7rem;
+    margin-top: -10px;
 }
 .avaliable {
     background: #009973;
@@ -53,12 +59,11 @@ html, body {
     background: #25758F;
 }
 .selecteds {
-    width: 30%;
-    border-radius: 6px;
     box-shadow: 1px 8px 32px #999999;
     position: fixed;
-    bottom: 19%;
+    bottom: 0%;
     right: 0%;
-    background: rgba(253, 253, 253, 0.95);
+    width: 100%;
+    background: rgba(253, 253, 253, 0.98);
     z-index: 140;
 }
