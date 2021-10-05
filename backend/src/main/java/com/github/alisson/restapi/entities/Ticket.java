@@ -12,7 +12,7 @@ public class Ticket {
     private Long number;
     private String status;
 
-    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "tickets")
+    @ManyToMany(cascade = CascadeType.DETACH, mappedBy = "tickets")
     private List<Reserve> reserves;
 
     public Ticket() {

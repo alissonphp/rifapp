@@ -20,7 +20,7 @@ public class Reserve {
     @JoinColumn(name = "buyer_id")
     private Buyer buyer;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.DETACH)
     @JoinTable(name = "reserve_tickets", joinColumns = {@JoinColumn(name = "reserve_id")}, inverseJoinColumns = {@JoinColumn(name = "ticket_id")})
     private List<Ticket> tickets;
 
@@ -30,8 +30,7 @@ public class Reserve {
 
     private Boolean confirmed = false;
 
-    public Reserve(Long id, Partner partner, Buyer buyer, List<Ticket> tickets) {
-        this.id = id;
+    public Reserve(Partner partner, Buyer buyer, List<Ticket> tickets) {
         this.partner = partner;
         this.buyer = buyer;
         this.tickets = tickets;
