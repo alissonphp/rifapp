@@ -2,10 +2,17 @@ package com.github.alisson.restapi.services;
 
 import com.github.alisson.restapi.dto.ReserveDTO;
 import com.github.alisson.restapi.entities.Buyer;
+import com.github.alisson.restapi.entities.Reserve;
+import com.github.alisson.restapi.entities.Ticket;
 import com.github.alisson.restapi.repositories.IBuyerRepository;
 import com.github.alisson.restapi.repositories.IReserveRepository;
+import com.github.alisson.restapi.repositories.ITicketRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Service
 public class ReserveService {
@@ -16,20 +23,20 @@ public class ReserveService {
     @Autowired
     private IBuyerRepository buyerRepository;
 
+    @Autowired
+    private ITicketRepository ticketRepository;
+
+    @Transactional
     public ReserveDTO save(ReserveDTO reserveDTO) {
-        /**
-         * check if buyer exists
-         * if not, create
-         */
-
         Buyer check = buyerRepository.findByPhoneOrDocument(reserveDTO.getBuyer().getPhone(), reserveDTO.getBuyer().getDocument());
-
-        if(check != null) {
-            reserveDTO.setBuyer(check);
-        } else {
-            reserveDTO.setBuyer(buyerRepository.save(reserveDTO.getBuyer()));
-        }
-
+        reserveDTO.setBuyer(Objects.requireNonNullElseGet(check, () -> buyerRepository.save(reserveDTO.getBuyer())));
+        Reserve reserve = repository.save(new Reserve(reserveDTO.getPartner(), reserveDTO.getBuyer(), reserveDTO.getTickets()));
+        reserveDTO.setId(reserve.getId());
+        reserveDTO.setConfirmed(reserve.getConfirmed());
+        ticketRepository.updateStatusByNumbers("reservado", reserveDTO.getTickets()
+                .stream()
+                .map(Ticket::getId)
+                .collect(Collectors.toList()));
         return reserveDTO;
     }
 }
