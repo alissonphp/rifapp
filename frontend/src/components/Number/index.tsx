@@ -1,20 +1,22 @@
+import { TNumber } from "types/Number";
+
 type Props = {
-    num: number | string;
+    num: TNumber
     onNumberSelected: Function;
 };
 
 const Number = ({num, onNumberSelected}: Props) => {
-    const clicked = (item: string | number) => {
+    const clicked = (item: TNumber) => {
         onNumberSelected(num);
     };
     return (
         <div
-            onClick={() => clicked(num)}
+            onClick={() => num.status === 'disponível' ? clicked(num) : undefined}
             className="col-md-2 col-lg-1 col-sm-6 col-xs-6 text-center p-1 d-flex justify-content-center"
         >
-            <div className="number avaliable">
-                <h1>{num}</h1>
-                <small>DISPONÍVEL</small>
+            <div className={`number ${num.status === 'disponível' ? "avaliable" : "reserved"}`}>
+                <h1>{num.number}</h1>
+                <small className="text-uppercase">{num.status}</small>
             </div>
         </div>
     );
