@@ -11,6 +11,7 @@ import java.util.List;
 
 public class ReserveDTO implements Serializable {
 
+    private Long id;
     private Partner partner;
     private Buyer buyer;
     private Date createAt;
@@ -21,6 +22,14 @@ public class ReserveDTO implements Serializable {
         this.partner = partner;
         this.buyer = buyer;
         this.tickets = tickets;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Partner getPartner() {
