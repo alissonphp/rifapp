@@ -3,6 +3,7 @@ import NavBar from "components/NavBar";
 import { useLocation } from "react-router";
 import { Link } from "react-router-dom";
 import { TNumber } from "types/Number";
+import { PHONE_CLEANER } from "utils/transform";
 
 const Success = () => {
   const location: any = useLocation();
@@ -13,7 +14,7 @@ const Success = () => {
         <div className="row">
           <div className="col-md-12">
             <h1 className="mt-3 text-success">
-              Reserva realizada com sucesso!
+              Reserva realizada com sucesso. Boa sorte!
             </h1>
             <h4 className="mt-4">
               O número da reserva é #{location.state.response.id}
@@ -34,7 +35,16 @@ const Success = () => {
                     <p className="mb-1 text-uppercase">
                       {location.state.response.partner.name}
                     </p>
-                    <p>Telefone: {location.state.response.partner.phone}</p>
+                    <p>
+                      Telefone: 
+                      <a
+                        href={`https://wa.me/55${PHONE_CLEANER(
+                          location.state.response.partner.phone
+                        )}`}
+                      > 
+                         {location.state.response.partner.phone} 
+                      </a>
+                    </p>
                   </div>
                 </div>
               </div>
@@ -50,7 +60,14 @@ const Success = () => {
                       {location.state.response.buyer.name} (CPF:{" "}
                       {location.state.response.buyer.document})
                     </p>
-                    <p>Telefone: {location.state.response.buyer.phone}</p>
+                    <p>
+                      Telefone:{" "}
+                      <a
+                        href={`https://wa.me/55${location.state.response.buyer.phone}?text=Sua reserva foi confirmada!`}
+                      >
+                        {location.state.response.buyer.phone}
+                      </a>
+                    </p>
                   </div>
                 </div>
               </div>

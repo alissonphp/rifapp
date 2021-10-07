@@ -1,10 +1,61 @@
-import { Field, Formik } from "formik";
+import { Field, FieldProps, Formik, FormikValues } from "formik";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { useHistory, useLocation } from "react-router";
 import { TNumber } from "types/Number";
 import axios from "axios";
 import { BASE_URL } from "utils/requests";
+import * as Yup from "yup";
+import MaskedInput from "react-text-mask";
+import { PHONE_CLEANER } from "utils/transform";
+
+const validationSchema = Yup.object().shape({
+  name: Yup.string()
+    .min(6, "Nome deve ter pelo menos 6 caracteres")
+    .required("Obrigatório"),
+  email: Yup.string().email("E-mail inválido"),
+  phone: Yup.string()
+    .length(15, "Telefone deve conter 11 dígitos")
+    .required("Obrigatório"),
+  document: Yup.string()
+    .length(14, "CPF deve conter 11 dígitos")
+    .required("Obrigatório"),
+});
+
+const phoneNumberMask = [
+  "(",
+  /[1-9]/,
+  /\d/,
+  ")",
+  " ",
+  /\d/,
+  /\d/,
+  /\d/,
+  /\d/,
+  /\d/,
+  "-",
+  /\d/,
+  /\d/,
+  /\d/,
+  /\d/,
+];
+
+const documentMask = [
+  /\d/,
+  /\d/,
+  /\d/,
+  ".",
+  /\d/,
+  /\d/,
+  /\d/,
+  ".",
+  /\d/,
+  /\d/,
+  /\d/,
+  "-",
+  /\d/,
+  /\d/,
+];
 
 const ReserveForm = () => {
   const location: any = useLocation();
@@ -57,10 +108,15 @@ const ReserveForm = () => {
       </div>
       <Formik
         initialValues={{ name: "", email: "", phone: "", document: "" }}
+        validationSchema={validationSchema}
         onSubmit={(values, { setSubmitting }) => {
           setTimeout(() => {
             const data = {
-              buyer: values,
+              buyer: {
+                ...values,
+                document: PHONE_CLEANER(values.document),
+                phone: PHONE_CLEANER(values.phone),
+              },
               partner: location.state.partner,
               tickets: location.state.selecteds,
             };
@@ -68,9 +124,9 @@ const ReserveForm = () => {
               .post(`${BASE_URL}/reserves`, data)
               .then((res) => {
                 history.push({
-                    pathname: '/success',
-                    state: { response: res.data }
-                })
+                  pathname: "/success",
+                  state: { response: res.data },
+                });
               })
               .catch((err) => {
                 console.error(err);
@@ -82,14 +138,26 @@ const ReserveForm = () => {
         {({ values, errors, touched, handleSubmit, isSubmitting }) => (
           <form onSubmit={handleSubmit}>
             <div className="form-group mt-3">
-              <label htmlFor="document">CPF (somente números):</label>
+              <label htmlFor="document">CPF:</label>
               <Field
-                type="text"
                 name="document"
-                placeholder="12345678900"
-                value={values.document}
-                className="form-control"
+                render={({ field }: FieldProps<FormikValues>) => {
+                  return (
+                    <MaskedInput
+                      {...field}
+                      mask={documentMask}
+                      id="document"
+                      value={values.document}
+                      placeholder="123.456.789-99"
+                      className="form-control"
+                      type="tel"
+                    />
+                  );
+                }}
               />
+              {errors.document && touched.document ? (
+                <div className="alert alert-danger">{errors.document}</div>
+              ) : null}
             </div>
             <div className="form-group mt-3">
               <label htmlFor="name">Seu nome:</label>
@@ -100,6 +168,9 @@ const ReserveForm = () => {
                 value={values.name}
                 className="form-control"
               />
+              {errors.name && touched.name ? (
+                <div className="alert alert-danger">{errors.name}</div>
+              ) : null}
             </div>
             <div className="form-group mt-3">
               <label htmlFor="email">E-mail:</label>
@@ -110,16 +181,31 @@ const ReserveForm = () => {
                 value={values.email}
                 className="form-control"
               />
+              {errors.email && touched.email ? (
+                <div className="alert alert-danger">{errors.email}</div>
+              ) : null}
             </div>
             <div className="form-group mt-3">
               <label htmlFor="phone">Telefone: (whatsapp)</label>
               <Field
-                type="tel"
                 name="phone"
-                placeholder="(98) 98154-6987"
-                value={values.phone}
-                className="form-control"
+                render={({ field }: FieldProps<FormikValues>) => {
+                  return (
+                    <MaskedInput
+                      {...field}
+                      mask={phoneNumberMask}
+                      id="phone"
+                      value={values.phone}
+                      placeholder="(98) 98745-9874"
+                      className="form-control"
+                      type="tel"
+                    />
+                  );
+                }}
               />
+              {errors.phone && touched.phone ? (
+                <div className="alert alert-danger">{errors.phone}</div>
+              ) : null}
             </div>
             <div className="d-grid gap-2 mt-4 mb-4">
               <button
