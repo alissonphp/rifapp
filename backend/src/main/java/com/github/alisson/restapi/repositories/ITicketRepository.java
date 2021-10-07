@@ -13,4 +13,6 @@ public interface ITicketRepository extends JpaRepository<Ticket, Long> {
     @Query("update Ticket t set t.status = ?1 where t.id in (?2)")
     void updateStatusByNumbers(String status, List<Long> ids);
 
+    List<Ticket> findByOrderByNumberAsc();
+
 }

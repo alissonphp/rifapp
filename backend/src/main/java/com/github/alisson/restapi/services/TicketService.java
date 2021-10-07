@@ -16,7 +16,7 @@ public class TicketService {
     private ITicketRepository repository;
 
     public List<TicketDTO> getAll() {
-        List<Ticket> results = repository.findAll();
+        List<Ticket> results = repository.findByOrderByNumberAsc();
         return results.stream().map(TicketDTO::new).collect(Collectors.toList());
     }
 
