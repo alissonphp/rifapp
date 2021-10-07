@@ -7,22 +7,26 @@ const Slides = () => {
             showArrows={true}
             showThumbs={false}
             autoPlay={true}
-            interval={3000}
+            interval={4000}
             infiniteLoop={true}
             emulateTouch={true}
+            dynamicHeight={true}
             swipeable={true}
             stopOnHover={true}
             transitionTime={300}
         >
             <div>
                 <img
-                    src="https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&h=460&q=80"
+                    src="https://i.ibb.co/ZKR34RW/Whats-App-Image-2021-08-14-at-12-26-03.jpg"
                     alt=""
                 />
             </div>
             <div>
+                <img src="https://i.ibb.co/YPbzsYQ/Whats-App-Image-2021-10-06-at-10-28-08.jpg" alt="quadro" />
+            </div>
+            <div>
                 <img
-                    src="https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&h=460&q=80"
+                    src="https://i.ibb.co/7gyYb0X/Whats-App-Image-2021-10-06-at-10-28-35.jpg"
                     alt=""
                 />
             </div>

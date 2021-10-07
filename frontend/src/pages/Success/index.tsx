@@ -64,7 +64,7 @@ const Success = () => {
                 <h5 className="mt-3 my-0">
                   Total: R$ {location.state.response.tickets.length * 50.0},00
                 </h5>
-                <h6 className="mt-4">PIX: 182737817635625</h6>
+                <h6 className="mt-4">PIX: 07351711000150</h6>
               </div>
             </ul>
 
