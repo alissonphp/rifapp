@@ -51,8 +51,8 @@ const Infos = (props: InfosProps) => {
                   <div className="d-flex w-100 justify-content-between">
                     <h5 className="mb-1">Oferecido por</h5>
                     <small className="text-muted">
-                      <FontAwesomeIcon icon={faWhatsapp}/> (98)
-                      98110-5977
+                    <a href="https://wa.me/5598981105977?text=Gostaria de mais informações sobre Sorteio Entre Irmãos"><FontAwesomeIcon icon={faWhatsapp}/> (98)
+                      98110-5977</a>
                     </small>
                   </div>
                   <p className="mb-1">ARLS Lauro Sodré N 03</p>
@@ -72,7 +72,7 @@ const Infos = (props: InfosProps) => {
                                   <li>R$ 20,00 (vinte reais) para o parceiro que realizar a venda.</li>
                               </ul>
                           </li>
-                          <li>O parceiro interessado deve solicitar o cadastro na plataforma para que seja gerado o link dedicado a ele; a solicitação deve ser feita pelo whatsapp (98) 98110-5977 (Dirceu Carlos Brasileiro)</li>
+                          <li>O parceiro interessado deve solicitar o cadastro na plataforma para que seja gerado o link dedicado a ele; a solicitação deve ser feita pelo whatsapp <a href="https://wa.me/5598981105977?text=Quero me cadastrar como parceiro do Sorteio Entre Irmãos">(98) 98110-5977 (Dirceu Carlos Brasileiro)</a></li>
                           <li>O sorteio será realizado utilizando o "o globo" com bolas numeradas de 0 a 9, onde serão selecionadas 3 de forma a compor o número sorteado.</li>
                       </ul>
                   </div>

@@ -8,6 +8,7 @@ import axios from "axios";
 import { BASE_URL } from "utils/requests";
 import { Partner } from "types/Partner";
 import { TNumber } from "types/Number";
+import { PHONE_CLEANER } from "utils/transform";
 
 type NumbersProps = {
   partner: string;
@@ -84,7 +85,7 @@ const Numbers = (props: NumbersProps) => {
               R$ {selectNumbers.length * 50.0},00
             </span>
           </p>
-          <p>Parceiro: {partner?.name} ({partner?.phone})</p>
+          <p>Parceiro: {partner?.name} <a href={`https://wa.me/55${PHONE_CLEANER(partner?.phone)}`}>{partner?.phone}</a></p>
           <div className="d-grid gap-2">
             <Link
               className="btn btn-outline-success btn-lg mt-3"
