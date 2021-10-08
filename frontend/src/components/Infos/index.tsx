@@ -16,7 +16,7 @@ const Infos = (props: InfosProps) => {
             <div className="col-md-12">
               <h1>Sorteio "Entre Irmãos"</h1>
               <h4>
-                Quadro intitulado "Símbolos Maçônicos", já emoldurado, medindo 0,8m de largura
+                Quadro intitulado "Símbolos Maçônicos", já emoldurado, medindo 0,80m de largura
                 e 1,20m de altura, pintado em tela a óleo pelo artista plástico
                 Valdemar Barros, ludovicense, professor de pintura do Centro de
                 Cultura Odílo Costa Filho em São Luís, que possui diversas obras
