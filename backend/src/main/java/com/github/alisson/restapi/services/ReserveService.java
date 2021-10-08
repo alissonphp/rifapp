@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
@@ -25,6 +26,12 @@ public class ReserveService {
 
     @Autowired
     private ITicketRepository ticketRepository;
+
+    @Transactional
+    public List<Reserve> all() {
+//        return repository.findAll().stream().map(ReserveDTO::new).collect(Collectors.toList());
+        return repository.findAll();
+    }
 
     @Transactional
     public ReserveDTO save(ReserveDTO reserveDTO) {

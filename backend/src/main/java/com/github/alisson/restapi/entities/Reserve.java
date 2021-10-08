@@ -1,7 +1,6 @@
 package com.github.alisson.restapi.entities;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -20,7 +19,7 @@ public class Reserve {
     @JoinColumn(name = "buyer_id")
     private Buyer buyer;
 
-    @ManyToMany(cascade = CascadeType.DETACH)
+    @ManyToMany(cascade = CascadeType.DETACH, fetch = FetchType.EAGER)
     @JoinTable(name = "reserve_tickets", joinColumns = {@JoinColumn(name = "reserve_id")}, inverseJoinColumns = {@JoinColumn(name = "ticket_id")})
     private List<Ticket> tickets;
 

@@ -2,6 +2,7 @@ package com.github.alisson.restapi.dto;
 
 import com.github.alisson.restapi.entities.Buyer;
 import com.github.alisson.restapi.entities.Partner;
+import com.github.alisson.restapi.entities.Reserve;
 import com.github.alisson.restapi.entities.Ticket;
 
 import java.io.Serializable;
@@ -16,12 +17,21 @@ public class ReserveDTO implements Serializable {
     private Buyer buyer;
     private Date createAt;
     private Boolean confirmed;
-    private List<Ticket> tickets = new ArrayList<>();
+    private List<Ticket> tickets;
 
     public ReserveDTO(Partner partner, Buyer buyer, List<Ticket> tickets) {
         this.partner = partner;
         this.buyer = buyer;
         this.tickets = tickets;
+    }
+
+    public ReserveDTO(Reserve reserve) {
+        this.id = reserve.getId();
+        this.partner = reserve.getPartner();
+        this.buyer = reserve.getBuyer();
+        this.createAt = reserve.getCreatedAt();
+        this.confirmed = reserve.getConfirmed();
+        this.tickets = reserve.getTickets();
     }
 
     public Long getId() {

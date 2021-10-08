@@ -1,5 +1,7 @@
 package com.github.alisson.restapi.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -11,7 +13,6 @@ public class Ticket {
     private Long id;
     private Long number;
     private String status;
-
     @ManyToMany(cascade = CascadeType.DETACH, mappedBy = "tickets")
     private List<Reserve> reserves;
 
