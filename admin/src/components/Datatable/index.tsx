@@ -1,0 +1,103 @@
+import { useEffect, useState } from "react";
+import axios from "axios";
+import DataTable from "react-data-table-component";
+import { Reserve } from "types/Reserve";
+import { BASE_URL } from "utils/requests";
+import { TicketsToString } from "utils/tickets";
+import { TotalPartnerCommission, TotalReserveAmmount } from "utils/ammounts";
+
+const columns = [
+  {
+    name: "#",
+    selector: (row: Reserve) => row.id,
+    sortable: true,
+  },
+  {
+    name: "Data",
+    selector: (row: Reserve) => row.createdAt,
+    sortable: true,
+  },
+  {
+    name: "Parceiro",
+    selector: (row: Reserve) => `${row.partner.name} (${row.partner.phone})`,
+    sortable: true,
+    risize: true
+  },
+  {
+    name: "Comprador",
+    selector: (row: Reserve) => row.buyer.name,
+    sortable: true,
+  },
+  {
+    name: "CPF",
+    selector: (row: Reserve) => row.buyer.document,
+    sortable: true,
+  },
+  {
+    name: "Telefone",
+    selector: (row: Reserve) => row.buyer.phone,
+    sortable: true,
+  },
+  {
+    name: "Tickets",
+    selector: (row: Reserve) => TicketsToString(row.tickets),
+    sortable: true,
+  },
+  {
+    name: "Total (RS)",
+    selector: (row: Reserve) => TotalReserveAmmount(row.tickets),
+    sortable: true,
+  },
+  {
+    name: "Comissão (RS)",
+    selector: (row: Reserve) => TotalPartnerCommission(row.tickets),
+    sortable: true,
+  },
+  {
+    name: "Efetivo (RS)",
+    selector: (row: Reserve) =>
+      TotalReserveAmmount(row.tickets) - TotalPartnerCommission(row.tickets),
+    sortable: true,
+  },
+  {
+    name: "Confirmado",
+    selector: (row: Reserve) => (row.confirmed ? "Sim" : "Não"),
+    sortable: true,
+  },
+  {
+    name: "Ação",
+    cell: (row: Reserve) => (!row.confirmed ? <button className="btn btn-outline-success btn-sm"> confirmar </button> : "-"),
+  },
+];
+
+const conditionalRowStyles = [
+  {
+    when: (row: Reserve) => row.confirmed,
+    style: {
+      backgroundColor: "rgb(185, 244, 210)",
+    },
+  },
+];
+
+const Datatable = () => {
+  const [data, setData] = useState<Reserve[]>([]);
+
+  useEffect(() => {
+    axios.get(`${BASE_URL}/reserves`).then((res) => {
+      setData(res.data);
+    });
+  }, []);
+
+  return (
+    <DataTable
+      title="Controle de vendas do sorteio"
+      columns={columns}
+      data={data}
+      striped={true}
+      conditionalRowStyles={conditionalRowStyles}
+      pagination
+    />
+  );
+};
+
+export default Datatable;

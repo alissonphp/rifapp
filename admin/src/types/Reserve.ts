@@ -1,0 +1,27 @@
+export type Reserve = {
+  id: number;
+  partner: Partner;
+  buyer: Buyer;
+  tickets: Ticket[];
+  confirmed: boolean;
+  createdAt: string;
+};
+
+type Partner = {
+  code: string;
+  name: string;
+  phone: string;
+  photo_url?: string;
+};
+
+type Buyer = {
+  name: string;
+  phone: string;
+  email?: string;
+  document: string;
+};
+
+export type Ticket = {
+  number: number;
+  status: string;
+};
