@@ -4,7 +4,8 @@ import DataTable from "react-data-table-component";
 import { Reserve } from "types/Reserve";
 import { BASE_URL } from "utils/requests";
 import { TicketsToString } from "utils/tickets";
-import { TotalPartnerCommission, TotalReserveAmmount } from "utils/ammounts";
+import { TotalReserveAmmount } from "utils/ammounts";
+import ReserveDetails from "components/ReserveDetails";
 
 const columns = [
   {
@@ -19,7 +20,7 @@ const columns = [
   },
   {
     name: "Parceiro",
-    selector: (row: Reserve) => `${row.partner.name} (${row.partner.phone})`,
+    selector: (row: Reserve) => row.partner.name,
     sortable: true,
     risize: true
   },
@@ -34,11 +35,6 @@ const columns = [
     sortable: true,
   },
   {
-    name: "Telefone",
-    selector: (row: Reserve) => row.buyer.phone,
-    sortable: true,
-  },
-  {
     name: "Tickets",
     selector: (row: Reserve) => TicketsToString(row.tickets),
     sortable: true,
@@ -46,17 +42,6 @@ const columns = [
   {
     name: "Total (RS)",
     selector: (row: Reserve) => TotalReserveAmmount(row.tickets),
-    sortable: true,
-  },
-  {
-    name: "Comissão (RS)",
-    selector: (row: Reserve) => TotalPartnerCommission(row.tickets),
-    sortable: true,
-  },
-  {
-    name: "Efetivo (RS)",
-    selector: (row: Reserve) =>
-      TotalReserveAmmount(row.tickets) - TotalPartnerCommission(row.tickets),
     sortable: true,
   },
   {
@@ -95,6 +80,8 @@ const Datatable = () => {
       data={data}
       striped={true}
       conditionalRowStyles={conditionalRowStyles}
+      expandableRows
+      expandableRowsComponent={ReserveDetails}
       pagination
     />
   );

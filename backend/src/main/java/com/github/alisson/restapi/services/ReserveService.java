@@ -1,5 +1,6 @@
 package com.github.alisson.restapi.services;
 
+import com.github.alisson.restapi.dto.ConfirmReserveDTO;
 import com.github.alisson.restapi.dto.ReserveDTO;
 import com.github.alisson.restapi.entities.Buyer;
 import com.github.alisson.restapi.entities.Reserve;
@@ -45,5 +46,17 @@ public class ReserveService {
                 .map(Ticket::getId)
                 .collect(Collectors.toList()));
         return reserveDTO;
+    }
+
+    @Transactional
+    public String confirm(ConfirmReserveDTO confirmReserveDTO) {
+        try {
+            Reserve reserve = repository.getById(confirmReserveDTO.getId());
+            reserve.setConfirmed(confirmReserveDTO.getConfirmed());
+            repository.save(reserve);
+            return "reserva atualizada";
+        } catch (Exception e) {
+            return e.getMessage();
+        }
     }
 }

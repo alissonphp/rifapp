@@ -22,6 +22,7 @@ type Buyer = {
 };
 
 export type Ticket = {
+  id: number;
   number: number;
   status: string;
 };
