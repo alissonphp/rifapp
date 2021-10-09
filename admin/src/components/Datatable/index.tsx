@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom"
 import axios from "axios";
 import DataTable from "react-data-table-component";
 import { Reserve } from "types/Reserve";
@@ -51,7 +52,12 @@ const columns = [
   },
   {
     name: "Ação",
-    cell: (row: Reserve) => (!row.confirmed ? <button className="btn btn-outline-success btn-sm"> confirmar </button> : "-"),
+    cell: (row: Reserve) => (!row.confirmed ? <Link to={{
+      pathname: "/confirmation",
+      state: {
+        reserve: row
+      }
+    }} className="btn btn-outline-success btn-sm"> confirmar </Link> : "-"),
   },
 ];
 
