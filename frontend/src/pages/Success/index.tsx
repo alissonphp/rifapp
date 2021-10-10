@@ -78,10 +78,10 @@ const Success = () => {
                     {i.number}
                   </span>
                 ))}
-                <h5 className="mt-3 my-0">
-                  Total: R$ {location.state.response.tickets.length * 50.0},00
-                </h5>
-                <h6 className="mt-4">PIX: 07351711000150</h6>
+                <h5 className="mt-3 my-0"> Total: R$ {location.state.response.tickets.length * 50.0},00 </h5>
+                <h5 className="mt-3 my-0 text-success"> Sua comissão: R$ {location.state.response.tickets.length * 20.0},00 </h5>
+                <h5 className="mt-3 my-0 text-primary"> A ser transferido: R$ {location.state.response.tickets.length * 30.0},00 </h5>
+                <h5 className="mt-4">PIX (CNPJ): 07351711000150 <br/><small>LOJA MACONICA LAURO SODRE</small></h5>
               </div>
             </ul>
 
