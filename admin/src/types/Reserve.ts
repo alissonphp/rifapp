@@ -7,7 +7,8 @@ export type Reserve = {
   createdAt: string;
 };
 
-type Partner = {
+export type Partner = {
+  id?: number;
   code: string;
   name: string;
   phone: string;
